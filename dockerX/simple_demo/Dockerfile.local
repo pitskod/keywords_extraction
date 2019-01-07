@@ -1,0 +1,16 @@
+ARG IMAGE
+FROM $IMAGE
+
+ENV APP_PATH=/home/jovyan/work/simple-demo
+RUN mkdir -p $APP_PATH
+WORKDIR $APP_PATH
+
+RUN CFLAGS="-Wno-narrowing" pip install cld2-cffi
+RUN pip install multi-rake
+RUN pip install git+https://github.com/boudinfl/pke.git
+RUN python3 -m spacy download de
+COPY simple_demo/requirements.txt .
+RUN pip install -r requirements.txt
+
+COPY simple_demo/ . 
+CMD jupyter notebook --NotebookApp.token='' --NotebookApp.password=''

@@ -1,0 +1,14 @@
+version: '3'
+services:
+    simple_demo:
+        build:
+            context: ../
+            dockerfile: dockerX/simple_demo/Dockerfile.local
+            args:
+                IMAGE: "jupyter/minimal-notebook"
+        restart:
+            on-failure
+        ports:
+            - 8888:8888
+        volumes:
+            - ../simple_demo:/home/jovyan/work/simple-demo
