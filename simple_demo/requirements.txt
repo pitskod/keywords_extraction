@@ -1,0 +1,3 @@
+nltk
+rake-nltk
+ipywidgets
